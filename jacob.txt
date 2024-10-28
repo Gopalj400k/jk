@@ -1,0 +1,690 @@
+1. Cline Test
+   public class ClineTest {
+    public static void main(String[] args) {
+        int numberOfArguments = args.length;
+        System.out.println("No. of arguments: " + numberOfArguments);
+
+        for (int i = 0; i < numberOfArguments; i++) {
+            String argument = args[i];
+            System.out.println(i + " java is " + argument + "!");
+        }
+    }
+}
+Run:javac ClineTest.java/java ClineTest args1 args2 args3/java ClineTest name fname sname
+Discription:Java program name client test is designed to demonstrate the use command line in a java application. The program takes a variable number of arguments from command  line the number of argument passed, followed by each argument with its corresponding index. This argument Pass To Main method and array of string object
+
+2. Datainput
+import java.util.Scanner;
+
+public class Datainput {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter an integer: ");
+        int integerInput = scanner.nextInt();
+        
+        System.out.print("Enter a double: ");
+        double doubleInput = scanner.nextDouble();
+        
+        scanner.nextLine(); // Clear the buffer
+        
+        System.out.print("Enter a string: ");
+        String stringInput = scanner.nextLine();
+        
+        System.out.print("Enter three integers separated by spaces: ");
+        int first = scanner.nextInt();
+        int second = scanner.nextInt();
+        int third = scanner.nextInt();
+        
+        System.out.println("You entered integer: " + integerInput);
+        System.out.println("You entered double: " + doubleInput);
+        System.out.println("You entered string: " + stringInput);
+        System.out.println("You entered integers: " + first + ", " + second + ", " + third);
+        
+        scanner.close();
+    }
+}
+Run: javac Datainput.java/java Datainput
+Description: The DataInput program is a straightforward Java application that demonstrates how to handle user input using the scanner class.
+1. getting an integer: The program prompts the user to input an integer and stores it in integerinput.
+2.getting a double: it ask for a double and stores int in doubleInput.
+3.getting a string: The user is prompt to enter a string, which is stored  in stringinput
+4.getting three integers: the program requests three integers separated by spaces, storing them in first, second, and third.
+to help us to understand basic user interaction,input collection and resource management in java.
+
+3. Constructor overloading
+class Area {
+    int length;
+    int width;
+    int radius;
+    float base;
+    float height;
+
+    Area(int x, int y) {
+        length = x;
+        width = y;
+    }
+
+    Area(float r) {
+        radius = (int) r; // Cast float r to int for radius
+    }
+
+    Area(float b, float h) {
+        base = b;
+        height = h;
+    }
+
+    int rectArea() {
+        return (length * width);
+    }
+
+    float circleArea() {
+        return (float) (3.14 * radius * radius); // Cast result to float
+    }
+
+    float triangleArea() {
+        return (float) (0.5 * base * height); // Cast result to float
+    }
+
+    public static void main(String args[]) {
+        Area a1 = new Area(10, 5);
+        Area a2 = new Area(7.0f); // Use float literal for radius
+        Area a3 = new Area(4.0f, 3.0f); // Use float literals for base and height
+
+        int r1 = a1.rectArea();
+        float c1 = a2.circleArea();
+        float t1 = a3.triangleArea(); // Fixed typo ':' to ';'
+
+        System.out.println("Area of Rectangle=" + r1); // Changed print to println
+        System.out.println("Area of Circle=" + c1); // Changed print to println
+        System.out.println("Area of Triangle=" + t1); // Changed print to println
+    }
+}
+
+Run: javac Area.java/ java Area
+
+Description: Constructor overloading is a technique of having multiple constructor in a same class with different parameters. It allows different ways to initialize and object. For example, one constructor might initialize an object with default values, while another might except parameters to set initial values. Do not specify return type. Constructor overloading in Java provides flexibility, readability and convenience by allowing multiple ways to initialize and object with different set of parameters
+
+4. Method overloading
+
+class Area1 {
+    int length, breadth;
+    float radius;
+    float base, height;
+
+    void getData(int x, int y) {
+        length = x;
+        breadth = y;
+    }
+
+    void getData(float r) {
+        radius = r;
+    }
+
+    void getData(float b, float h) {
+        base = b;
+        height = h;
+    }
+
+    int rectArea() {
+        return (length * breadth);
+    }
+
+    float circleArea() {
+        return (3.14f * radius * radius); // Use 'f' to denote float literal
+    }
+
+    float triangleArea() {
+        return (0.5f * base * height); // Use 'f' to denote float literal
+    }
+}
+
+public class Area1Main {
+    public static void main(String[] args) {
+        Area1 rect = new Area1();
+        rect.getData(2, 3);
+        int rectArea = rect.rectArea();
+        System.out.println("Area of Rectangle: " + rectArea);
+
+        Area1 circle = new Area1();
+        circle.getData(5);
+        float circleArea = circle.circleArea();
+        System.out.println("Area of Circle: " + circleArea);
+
+        Area1 triangle = new Area1();
+        triangle.getData(2, 3);
+        float triangleArea = triangle.triangleArea();
+        System.out.println("Area of Triangle: " + triangleArea);
+    }
+}
+
+Run: javac Area1Main.java/java Area1Main
+
+Description:If a class has multiple methods having same name but different in parameters, it is known as method overloading. If we have to perform only one operation, having the same name of the methods increase the readability of the program, suppose you have to perform addition of the given numbers but there can be any number of arguments, if you write the method such as a(int, int) for two parameters and b(int, int, int) for three parameters then it may be difficult for you as well as other parameters. To bhi perform this to figure out program quickly
+
+5.Method overriding
+file1
+// Animal.java
+public class Animal {
+    public static void main(String[] args) {
+        System.out.println("Animal makes a sound");
+    }
+}
+file2
+// Dog.java
+public class Dog extends Animal {
+    public static void main(String[] args) {
+        System.out.println("Dog barks");
+    }
+}
+Run: javac Animal.java/javac Dog.java/java Animal/java Dog
+Description:if subclass has been the same method as declared in the parent class, it is known as method overriding. Override is a base method. Same method but different behaviour. Method overriding is used to provide the specific implementation of a method which is already provided by its super class. Method overriding is used for runtime polymorphism. Rules: Method must have same name as the parent class, method must have the same parameter as in the parent class, there must be as IS-A relationship (inheritance). Syntax:-[ public class child name.Extends Parent name]
+
+6A. Concepts of inheritance.
+file1
+// Parent.java
+public class Parent {
+    public void display() {
+        System.out.println("This is the parent class.");
+    }
+}
+file2
+// Child.java
+public class Child extends Parent {
+    public void show() {
+        System.out.println("This is the child class.");
+    }
+
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display();  // Inherited method from Parent
+        obj.show();     // Method from Child
+    }
+}
+Run: javac Parent.java/javac Child.java/java Child
+Description:Inheritance in java is a mechanism that allows 1 class to acquire the properties and behaviours of another class this is done by creating a subclass that extends a super class. The subclass inherits the field and methods of the super class, promoting code reuse and stabilizing a natural relationship between classes. This helps in organizing code better and avoiding duplication. Syntax:-[ public class childname extends parentname] there are four types of inheritance- single, multilevel, hierarchical and multiple inheritance
+
+6B.Multilevel inheritance
+file1
+// Grandparent.java
+public class Grandparent {
+    public void grandparentMethod() {
+        System.out.println("This is the grandparent class.");
+    }
+}
+file2
+// Parent1.java
+public class Parent1 extends Grandparent {
+    public void parent1Method() {
+        System.out.println("This is the parent1 class.");
+    }
+}
+file3
+// Child1.java
+public class Child1 extends Parent1 {
+    public void child1Method() {
+        System.out.println("This is the Child1 class.");
+    }
+
+    public static void main(String[] args) {
+        Child1 obj = new Child1();
+        obj.grandparentMethod();  // Inherited from Grandparent
+        obj.parent1Method();      // Inherited from Parent1
+        obj.child1Method();       // Method from Child1
+    }
+}
+Run: javac GrandParent.java/javac Parent1.java/javac Child1.java/java Child1
+
+7A.Exception Handling
+public class Exception 
+{
+    public static void main(String[] args) 
+  {
+        try 
+   {
+            int a = 5;
+            int b = 0;
+            int result = a / b;
+        } catch (ArithmeticException e)  
+{
+            System.out.println("You cannot divide by zero!");
+        }
+    }
+}
+Run: javac Exception.java/java Exception
+Description: Section ending is a mechanism that allows a program to manage and respond to runtime error or exceptional conditions in a controlled way. Instead of letting the program crash when an error occurs, you can catch this errors and handle them gracefully, ensuring the program continuous to run or shutdown properly. Try-catch-finally. Try:- for that might through an exception. Catch:- code to handle the exception occurs. Finally:- code that runs after the try and catch blocks, regardless of whether an exception was thrown.
+
+7B.Throw Exception(caught exception)
+
+public class SimpleThrowExample {
+    public static void main(String[] args) {
+        try {
+            checkAge(15);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught exception: " + e.getMessage());
+        }
+    }
+
+    public static void checkAge(int age) {
+        if (age < 18) {
+            throw new IllegalArgumentException("Age must be at least 18.");
+        } else {
+            System.out.println("Age is valid.");
+        }
+    }
+}
+Run: javac SimpleThrowExample.java/java SimpleThrowExample
+
+7C. multicatch exception
+
+public class MultiCatch {
+    public static void main(String[] args) {
+        try {
+            int a = args.length;
+            System.out.println("a = " + a);
+
+            // Potential division by zero if no arguments are passed
+            int b = 12 / a;
+
+            // Array index out of bounds
+            int[] c = new int[5];
+            c[42] = 99;
+
+        } catch (ArithmeticException e) {
+            System.out.println("Divide by 0: " + e);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array index out of bounds: " + e);
+        } finally {
+            System.out.println("After try/catch blocks.");
+        }
+    }
+}
+Run: javac MultiCatch.java/java MultiCatch
+
+8. packages
+fol1
+package1/ClassA.java
+
+package package1;
+
+public class ClassA {
+    public void display() {
+        System.out.println("Hello from ClassA in package1");
+    }
+}
+-
+package2/ClassB.java
+
+package package2;
+
+public class ClassB {
+    public void display() {
+        System.out.println("Hello from ClassB in package2");
+    }
+}
+-
+MainApp.java
+import package1.ClassA;
+import package2.ClassB;
+
+public class MainApp {
+    public static void main(String[] args) {
+        ClassA objA = new ClassA();
+        objA.display();
+
+        ClassB objB = new ClassB();
+        objB.display();
+    }
+}
+
+Run: javac package1/ClassA.java / javac package2/ClassB.java / javac MainApp.java/java MainApp
+
+Description: Packages are like folder used to organise related classes and interfaces in Java. Grouping many class or interface together. They help keep your code structure and make it easier to manage. We use packages for organising, avoid conflicts, access control, etc. Packages are classified into two parts 1.API 2. User define API(application programming language) is a software applicate to communicate and interact with each other. Example io, awt, net,lang, etc. 
+- user define is to create an import packages syntax:-[ java.awt.math.sqrt(10)]
+
+9.client server
+file1
+import java.io.*;
+import java.net.*;
+
+public class SimpleServer {
+    public static void main(String[] args) {
+        // Attempt to start the server and listen on port 12345
+        try (ServerSocket serverSocket = new ServerSocket(12345)) {
+            System.out.println("Server started on port 12345");
+
+            // Wait for a client connection
+            try (
+                Socket clientSocket = serverSocket.accept(); // Accept a client connection
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
+            ) {
+                System.out.println("Client connected");
+
+                // Read message from client
+                String message = in.readLine();
+                System.out.println("Received from client: " + message);
+
+                // Send a response back to the client
+                out.println("Message received: " + message);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+file2
+import java.io.*;
+import java.net.*;
+
+public class SimpleClient {
+    public static void main(String[] args) {
+        try (
+            // Connect to the server on localhost and port 12345
+            Socket socket = new Socket("localhost", 12345);
+
+            // Output stream to send data to the server
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+
+            // Input stream to receive data from the server
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            // Input stream to read user input from the console
+            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))
+        ) {
+            // Prompt the user to enter a message
+            System.out.print("Enter message to send to server: ");
+            String message = userInput.readLine(); // Read input from the console
+
+            // Send the message to the server
+            out.println(message);
+
+            // Read the response from the server
+            String response = in.readLine();
+            System.out.println("Received from server: " + response);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+Run: cmd1:javac SimpleServer.java/javac SimpleClient.java/java SimpleServer/cmd2:javac SimpleClient.java/java SimpleClient
+
+Description:Server:- listens for incoming connections and handles request from clients 
+clients:- connect to the server and send request or data 
+How it work 
+Server waits for clients to connect on a specific part. Except connection and start communication with the client. Send receive data. Closes the connection when done. 
+Client connects to the server using the server IP address and Port. Send data to the server and receive response. Closes to the connection when finished. Server act as a receptionist waiting for clients to come in and client is like someone coming in asking question and getting answers
+
+10.Multithread
+class A extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("t from Thread A " + i);
+        }
+        System.out.println("Exit from A");
+    }
+}
+class B extends Thread {
+    public void run() {
+        for (int j = 1; j <= 5; j++) {
+            System.out.println("t from Thread B " + j);
+        }
+        System.out.println("Exit from B");
+    }
+}
+class C extends Thread {
+    public void run() {
+        for (int k = 1; k <= 5; k++) {
+            System.out.println("t from Thread C " + k);
+        }
+        System.out.println("Exit from C");
+    }
+}
+public class ThreadTest {
+    public static void main(String[] args) {
+        new A().start();
+        new B().start();
+        new C().start();
+    }
+}
+Run:javac ThreadTest.java/java ThreadTest
+Description: Multithreading in Java allows a program to run multiple task as the same time. Each task run on its own thread, which is like a separate path of execution. This makes programs faster and more responsive why doing several things simultaneously. Threads are small units of program that can run cocurrently. You can create Threads by either extending the thread class or implementing the runable interface. You can start a thread with the start() method, which clicks of the Threads work. Multiple threats needs to access shade resources, synchronization ensures they do not interfere with each other
+
+10.Swing program Calculator
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculator extends JFrame {
+    private JTextField firstNumberField;
+    private JTextField secondNumberField;
+    private JLabel resultLabel;
+
+    public Calculator() {
+        // Set up the frame
+        setTitle("Basic Calculator");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(5, 2));
+
+        JLabel firstNumberLabel = new JLabel("Enter first number:");
+        firstNumberField = new JTextField();
+        
+        JLabel secondNumberLabel = new JLabel("Enter second number:");
+        secondNumberField = new JTextField();
+        
+        JButton addButton = new JButton("+");
+        JButton subtractButton = new JButton("-");
+        JButton multiplyButton = new JButton("*");
+JButton divideButton = new JButton("/");
+
+        resultLabel = new JLabel("Result: ");
+
+        // Add components to the frame
+        add(firstNumberLabel);
+        add(firstNumberField);
+        add(secondNumberLabel);
+        add(secondNumberField);
+        add(addButton);
+        add(subtractButton);
+        add(multiplyButton);
+        add(divideButton);
+        add(new JLabel());  // Placeholder for spacing
+        add(resultLabel);
+
+        // Action listeners for the operation buttons
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateResult("+");
+            }
+        });
+
+        subtractButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+ calculateResult("-");
+            }
+        });
+
+        multiplyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateResult("*");
+            }
+        });
+
+        divideButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calculateResult("/");
+            }
+        });
+    }
+
+    private void calculateResult(String operation) {
+        try {
+            double num1 = Double.parseDouble(firstNumberField.getText());
+            double num2 = Double.parseDouble(secondNumberField.getText());
+            double result = 0;
+
+            switch (operation) {
+                case "+":
+result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        resultLabel.setText("Cannot divide by zero!");
+                        return;
+                    }
+                    break;
+            }
+
+            resultLabel.setText("Result: " + result);
+        } catch (NumberFormatException ex) {
+            resultLabel.setText("Invalid input!");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Calculator calculator = new Calculator();
+ calculator.setVisible(true);
+        });
+    }
+}
+Run: javac Calculator.java/java Calculator
+
+Description:Singh is a java library for creating graphical user interface GUI with components like labels button extra it allow you to build interactive desktop applications with a consistent look and feel across different platform this Java program create a basic calculator using a graphical interface we can use it to perform simple math operations like addition subtraction multiplication and division components J frame it open a window title basic Calculator with a size of 300x200 pixel. Text from slide enter first number and enter second number tell you what to do input in text fields to boxes where you typed in the number you want to calculate j button for buttons where you type in the number you want to input x,-,*,/ you choose the operation you want to perform result label a collection where result of calculation display
+
+12.Swing program Resume
+
+import javax.swing.*;
+import java.awt.*;
+
+public class ResumeForm extends JFrame {
+
+    public ResumeForm() {
+        setTitle("Simple Resume Form");
+        setSize(400, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(13, 2, 5, 5));
+
+        // Create labels and text fields for the form
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField nameField = new JTextField();
+
+        JLabel addressLabel = new JLabel("Address:");
+        JTextField addressField = new JTextField();
+
+        JLabel phoneLabel = new JLabel("Phone:");
+        JTextField phoneField = new JTextField();
+
+        JLabel emailLabel = new JLabel("Email:");
+        JTextField emailField = new JTextField();
+
+        JLabel genderLabel = new JLabel("Gender:");
+        String[] genders = {"Male", "Female", "Other"};  
+JComboBox<String> genderComboBox = new JComboBox<>(genders);
+
+        JLabel hobbiesLabel = new JLabel("Hobbies:");
+        JCheckBox hobby1 = new JCheckBox("Reading");
+        JCheckBox hobby2 = new JCheckBox("Traveling");
+        JCheckBox hobby3 = new JCheckBox("Sports");
+        JCheckBox hobby4 = new JCheckBox("Music");
+
+        JPanel hobbiesPanel = new JPanel();
+        hobbiesPanel.add(hobby1);
+        hobbiesPanel.add(hobby2);
+        hobbiesPanel.add(hobby3);
+        hobbiesPanel.add(hobby4);
+
+        JLabel educationLabel = new JLabel("Education:");
+        JTextField educationField = new JTextField();
+
+        JLabel experienceLabel = new JLabel("Experience:");
+        JTextField experienceField = new JTextField();
+
+        JLabel skillsLabel = new JLabel("Skills:");
+        JTextField skillsField = new JTextField();
+
+        JLabel certificationsLabel = new JLabel("Certifications:");
+        JTextField certificationsField = new JTextField();
+
+        // Create a button to submit the form
+ JButton submitButton = new JButton("Submit");
+        // Add components to the frame
+        add(nameLabel);
+        add(nameField);
+        add(addressLabel);
+        add(addressField);
+        add(phoneLabel);
+        add(phoneField);
+        add(emailLabel);
+        add(emailField);
+        add(genderLabel);
+        add(genderComboBox);
+        add(hobbiesLabel);
+        add(hobbiesPanel);
+        add(educationLabel);
+        add(educationField);
+        add(experienceLabel);
+        add(experienceField);
+        add(skillsLabel);
+        add(skillsField);
+        add(certificationsLabel);
+        add(certificationsField);
+        add(new JLabel());  // Empty label for spacing
+        add(submitButton);
+
+        // Action listener for the submit button
+        submitButton.addActionListener(e -> {
+// Retrieve the entered data
+            String name = nameField.getText();
+            String address = addressField.getText();
+            String phone = phoneField.getText();
+            String email = emailField.getText();
+            String gender = (String) genderComboBox.getSelectedItem();
+
+            // Collect selected hobbies
+            StringBuilder hobbies = new StringBuilder();
+            if (hobby1.isSelected()) hobbies.append("Reading, ");
+            if (hobby2.isSelected()) hobbies.append("Traveling, ");
+            if (hobby3.isSelected()) hobbies.append("Sports, ");
+            if (hobby4.isSelected()) hobbies.append("Music, ");
+            if (hobbies.length() > 0) {
+                hobbies.setLength(hobbies.length() - 2); // Remove the trailing comma and space
+            }
+
+            String education = educationField.getText();
+            String experience = experienceField.getText();
+            String skills = skillsField.getText();
+            String certifications = certificationsField.getText();
+
+            // Display the entered information (For simplicity, just showing in a message dialog)
+            JOptionPane.showMessageDialog(this, "Name: " + name + "\nAddress: " + address + "\nPhone: " + phone +
+                    "\nEmail: " + email + "\nGender: " + gender + "\nHobbies: " + hobbies.toString() + 
+"\nEducation: " + education + "\nExperience: " + experience + "\nSkills: " + skills + 
+                    "\nCertifications: " + certifications);
+        });
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            ResumeForm form = new ResumeForm();
+            form.setVisible(true);
+        });
+    }
+}
+Run:javac ResumeForm.java/java ResumeForm
+Description: Singh is a chawal library for creating graphical user interface GUI with components like components like label button text field extra it allows you to find interactive desktop application with a consistent look and field across different platform this Java program display a window with a form where user can enter details such as email address phone number email education skills experience and certificate when the user click on submit button the entered information is shown in the message box components j frame the window is titled simple resume form and has a size of 400 x 500 pixels it uses a grid layout with 11 rows and two columns to arrange the form field and labels je label each field has a corresponding label example name address j text field for user input j combo box for emails where we can select any one option j checkbox for hobbies where we can select multiple options at a time submit button a button labelled Summit to Trigger form submission
